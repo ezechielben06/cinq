@@ -279,7 +279,7 @@ const ModernTodoApp = () => {
             <div className="flex items-center space-x-3">
               <div className="w-25 h-25">
                 <img
-                  src="public\image.png"
+                  src="./image.png"
                   alt="Description"
                   className="w-full h-full object-cover"
                 />
