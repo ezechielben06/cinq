@@ -1,18 +1,29 @@
-import { useState, useEffect } from 'react';
-import { Plus, Check, X, Calendar, Filter, Sun, Moon, Trash2, Save, Download } from 'lucide-react';
+import { useState, useEffect } from "react";
+import {
+  Plus,
+  Check,
+  X,
+  Calendar,
+  Filter,
+  Sun,
+  Moon,
+  Trash2,
+  Save,
+  Download,
+} from "lucide-react";
 
 const ModernTodoApp = () => {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [newTask, setNewTask] = useState("");
+  const [filter, setFilter] = useState("all");
   const [darkMode, setDarkMode] = useState(false);
   const [lastSaved, setLastSaved] = useState(null);
 
   // Clés pour localStorage
   const STORAGE_KEYS = {
-    TASKS: 'todoapp_tasks',
-    DARK_MODE: 'todoapp_darkmode',
-    FILTER: 'todoapp_filter'
+    TASKS: "todoapp_tasks",
+    DARK_MODE: "todoapp_darkmode",
+    FILTER: "todoapp_filter",
   };
 
   // Charger les données au démarrage
@@ -35,7 +46,9 @@ const ModernTodoApp = () => {
       if (savedTasks) {
         const parsedTasks = JSON.parse(savedTasks);
         setTasks(parsedTasks);
-        console.log(`✅ ${parsedTasks.length} tâches chargées depuis le stockage local`);
+        console.log(
+          `✅ ${parsedTasks.length} tâches chargées depuis le stockage local`
+        );
       }
 
       // Charger le mode sombre
@@ -52,7 +65,7 @@ const ModernTodoApp = () => {
 
       setLastSaved(new Date());
     } catch (error) {
-      console.error('❌ Erreur lors du chargement des données:', error);
+      console.error("❌ Erreur lors du chargement des données:", error);
     }
   };
 
@@ -63,12 +76,14 @@ const ModernTodoApp = () => {
       localStorage.setItem(STORAGE_KEYS.DARK_MODE, JSON.stringify(darkMode));
       localStorage.setItem(STORAGE_KEYS.FILTER, filter);
       setLastSaved(new Date());
-      console.log('💾 Données sauvegardées automatiquement');
+      console.log("💾 Données sauvegardées automatiquement");
     } catch (error) {
-      console.error('❌ Erreur lors de la sauvegarde:', error);
+      console.error("❌ Erreur lors de la sauvegarde:", error);
       // Gérer le cas où localStorage est plein
-      if (error.name === 'QuotaExceededError') {
-        alert('⚠️ Espace de stockage local plein. Certaines données peuvent ne pas être sauvegardées.');
+      if (error.name === "QuotaExceededError") {
+        alert(
+          "⚠️ Espace de stockage local plein. Certaines données peuvent ne pas être sauvegardées."
+        );
       }
     }
   };
@@ -81,24 +96,26 @@ const ModernTodoApp = () => {
         darkMode,
         filter,
         exportedAt: new Date().toISOString(),
-        version: '1.0'
+        version: "1.0",
       };
-      
+
       const dataStr = JSON.stringify(dataToExport, null, 2);
-      const dataBlob = new Blob([dataStr], { type: 'application/json' });
-      
+      const dataBlob = new Blob([dataStr], { type: "application/json" });
+
       const url = URL.createObjectURL(dataBlob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.download = `todolist_backup_${new Date().toISOString().split('T')[0]}.json`;
+      link.download = `todolist_backup_${
+        new Date().toISOString().split("T")[0]
+      }.json`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      
-      console.log('📤 Données exportées avec succès');
+
+      console.log("📤 Données exportées avec succès");
     } catch (error) {
-      console.error('❌ Erreur lors de l\'exportation:', error);
+      console.error("❌ Erreur lors de l'exportation:", error);
     }
   };
 
@@ -110,24 +127,31 @@ const ModernTodoApp = () => {
       reader.onload = (e) => {
         try {
           const importedData = JSON.parse(e.target.result);
-          
+
           // Vérifier la structure des données
           if (importedData.tasks && Array.isArray(importedData.tasks)) {
             setTasks(importedData.tasks);
-            if (importedData.darkMode !== undefined) setDarkMode(importedData.darkMode);
+            if (importedData.darkMode !== undefined)
+              setDarkMode(importedData.darkMode);
             if (importedData.filter) setFilter(importedData.filter);
-            
+
             // Sauvegarder immédiatement
             setTimeout(saveData, 100);
-            
-            alert(`✅ Données importées avec succès ! ${importedData.tasks.length} tâches récupérées.`);
-            console.log('📥 Données importées avec succès');
+
+            alert(
+              `✅ Données importées avec succès ! ${importedData.tasks.length} tâches récupérées.`
+            );
+            console.log("📥 Données importées avec succès");
           } else {
-            alert('❌ Format de fichier invalide. Veuillez sélectionner un fichier d\'exportation valide.');
+            alert(
+              "❌ Format de fichier invalide. Veuillez sélectionner un fichier d'exportation valide."
+            );
           }
         } catch (error) {
-          console.error('❌ Erreur lors de l\'importation:', error);
-          alert('❌ Erreur lors de l\'importation du fichier. Vérifiez le format.');
+          console.error("❌ Erreur lors de l'importation:", error);
+          alert(
+            "❌ Erreur lors de l'importation du fichier. Vérifiez le format."
+          );
         }
       };
       reader.readAsText(file);
@@ -136,19 +160,23 @@ const ModernTodoApp = () => {
 
   // Fonction pour effacer toutes les données
   const clearAllData = () => {
-    if (window.confirm('⚠️ Êtes-vous sûr de vouloir effacer toutes les données ? Cette action est irréversible.')) {
+    if (
+      window.confirm(
+        "⚠️ Êtes-vous sûr de vouloir effacer toutes les données ? Cette action est irréversible."
+      )
+    ) {
       try {
         localStorage.removeItem(STORAGE_KEYS.TASKS);
         localStorage.removeItem(STORAGE_KEYS.DARK_MODE);
         localStorage.removeItem(STORAGE_KEYS.FILTER);
         setTasks([]);
         setDarkMode(false);
-        setFilter('all');
+        setFilter("all");
         setLastSaved(null);
-        console.log('🗑️ Toutes les données ont été effacées');
-        alert('✅ Toutes les données ont été effacées avec succès.');
+        console.log("🗑️ Toutes les données ont été effacées");
+        alert("✅ Toutes les données ont été effacées avec succès.");
       } catch (error) {
-        console.error('❌ Erreur lors de l\'effacement:', error);
+        console.error("❌ Erreur lors de l'effacement:", error);
       }
     }
   };
@@ -156,66 +184,74 @@ const ModernTodoApp = () => {
   // Ajouter une nouvelle tâche
   const addTask = (e) => {
     e.preventDefault();
-    if (newTask.trim() !== '') {
+    if (newTask.trim() !== "") {
       const task = {
         id: Date.now(),
         text: newTask.trim(),
         completed: false,
-        createdAt: new Date().toISOString().split('T')[0],
-        priority: 'medium',
-        updatedAt: new Date().toISOString()
+        createdAt: new Date().toISOString().split("T")[0],
+        priority: "medium",
+        updatedAt: new Date().toISOString(),
       };
       setTasks([task, ...tasks]);
-      setNewTask('');
+      setNewTask("");
     }
   };
 
   // Basculer l'état d'une tâche
   const toggleTask = (id) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { 
-        ...task, 
-        completed: !task.completed,
-        updatedAt: new Date().toISOString()
-      } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              completed: !task.completed,
+              updatedAt: new Date().toISOString(),
+            }
+          : task
+      )
+    );
   };
 
   // Supprimer une tâche
   const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   // Changer la priorité d'une tâche
   const changePriority = (id, priority) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { 
-        ...task, 
-        priority,
-        updatedAt: new Date().toISOString()
-      } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              priority,
+              updatedAt: new Date().toISOString(),
+            }
+          : task
+      )
+    );
   };
 
   // Filtrer les tâches
-  const filteredTasks = tasks.filter(task => {
-    if (filter === 'active') return !task.completed;
-    if (filter === 'completed') return task.completed;
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "active") return !task.completed;
+    if (filter === "completed") return task.completed;
     return true;
   });
 
   // Statistiques
   const totalTasks = tasks.length;
-  const completedTasks = tasks.filter(task => task.completed).length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
   const activeTasks = totalTasks - completedTasks;
 
   // Format de la dernière sauvegarde
   const formatLastSaved = () => {
-    if (!lastSaved) return 'Jamais';
+    if (!lastSaved) return "Jamais";
     const now = new Date();
     const diff = now - lastSaved;
-    
-    if (diff < 60000) return 'À l\'instant';
+
+    if (diff < 60000) return "À l'instant";
     if (diff < 3600000) return `Il y a ${Math.floor(diff / 60000)} min`;
     if (diff < 86400000) return `Il y a ${Math.floor(diff / 3600000)}h`;
     return lastSaved.toLocaleDateString();
@@ -223,70 +259,93 @@ const ModernTodoApp = () => {
 
   // Classes CSS conditionnelles
   const containerClass = `min-h-screen transition-all duration-300 ${
-    darkMode 
-      ? 'bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900' 
-      : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
+    darkMode
+      ? "bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900"
+      : "bg-gradient-to-br from-blue-50 via-white to-purple-50"
   }`;
 
   const cardClass = `backdrop-blur-xl rounded-2xl shadow-2xl border transition-all duration-300 ${
-    darkMode 
-      ? 'bg-white/10 border-white/20 text-white' 
-      : 'bg-white/80 border-white/40 text-gray-800'
+    darkMode
+      ? "bg-white/10 border-white/20 text-white"
+      : "bg-white/80 border-white/40 text-gray-800"
   }`;
 
   return (
     <div className={containerClass}>
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                <Check className="w-6 h-6 text-white" />
+              <div className="w-25 h-25">
+                <img
+                  src="public\image.png"
+                  alt="Description"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
-                <h1 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                  Ma Liste de Tâches
+                <h1
+                  className={`text-3xl font-bold ${
+                    darkMode ? "text-white" : "text-gray-800"
+                  }`}
+                >
+                  Tâche-liste
                 </h1>
-                <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                <p
+                  className={`text-sm ${
+                    darkMode ? "text-gray-300" : "text-gray-600"
+                  }`}
+                >
                   Organisez votre journée avec style
                 </p>
                 {/* Indicateur de sauvegarde */}
-                <div className={`text-xs mt-1 flex items-center justify-center space-x-1 ${
-                  darkMode ? 'text-gray-400' : 'text-gray-500'
-                }`}>
+                <div
+                  className={`text-xs mt-1 flex items-center justify-center space-x-1 ${
+                    darkMode ? "text-gray-400" : "text-gray-500"
+                  }`}
+                >
                   <Save className="w-3 h-3" />
                   <span>Dernière sauvegarde: {formatLastSaved()}</span>
                 </div>
               </div>
             </div>
-            
+
             {/* Toggle Dark Mode */}
             <button
               onClick={() => setDarkMode(!darkMode)}
               className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-                darkMode 
-                  ? 'bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30' 
-                  : 'bg-purple-500/20 text-purple-600 hover:bg-purple-500/30'
+                darkMode
+                  ? "bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30"
+                  : "bg-purple-500/20 text-purple-600 hover:bg-purple-500/30"
               }`}
             >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {darkMode ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
             </button>
           </div>
 
           {/* Statistiques */}
           <div className="grid grid-cols-3 gap-4 mb-6">
             <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-blue-500">{totalTasks}</div>
+              <div className="text-2xl font-bold text-blue-500">
+                {totalTasks}
+              </div>
               <div className="text-sm opacity-70">Total</div>
             </div>
             <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-orange-500">{activeTasks}</div>
+              <div className="text-2xl font-bold text-orange-500">
+                {activeTasks}
+              </div>
               <div className="text-sm opacity-70">Actives</div>
             </div>
             <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-green-500">{completedTasks}</div>
+              <div className="text-2xl font-bold text-green-500">
+                {completedTasks}
+              </div>
               <div className="text-sm opacity-70">Terminées</div>
             </div>
           </div>
@@ -295,10 +354,14 @@ const ModernTodoApp = () => {
         {/* Actions de sauvegarde */}
         <div className={cardClass + " p-4 mb-6"}>
           <div className="flex flex-wrap gap-2 justify-center items-center">
-            <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <span
+              className={`text-sm font-medium ${
+                darkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
               Gestion des données:
             </span>
-            
+
             <button
               onClick={exportData}
               className="px-3 py-1.5 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-500/30 transition-all duration-300 text-sm flex items-center space-x-1"
@@ -306,7 +369,7 @@ const ModernTodoApp = () => {
               <Download className="w-3 h-3" />
               <span>Exporter</span>
             </button>
-            
+
             <label className="px-3 py-1.5 bg-green-500/20 text-green-600 dark:text-green-400 rounded-lg hover:bg-green-500/30 transition-all duration-300 text-sm flex items-center space-x-1 cursor-pointer">
               <input
                 type="file"
@@ -317,7 +380,7 @@ const ModernTodoApp = () => {
               <Download className="w-3 h-3 rotate-180" />
               <span>Importer</span>
             </label>
-            
+
             <button
               onClick={clearAllData}
               className="px-3 py-1.5 bg-red-500/20 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-500/30 transition-all duration-300 text-sm flex items-center space-x-1"
@@ -336,12 +399,12 @@ const ModernTodoApp = () => {
                 type="text"
                 value={newTask}
                 onChange={(e) => setNewTask(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && addTask(e)}
+                onKeyPress={(e) => e.key === "Enter" && addTask(e)}
                 placeholder="Ajouter une nouvelle tâche..."
                 className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-                  darkMode 
-                    ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
-                    : 'bg-white border-gray-200 text-gray-800 placeholder-gray-500'
+                  darkMode
+                    ? "bg-white/10 border-white/20 text-white placeholder-gray-400"
+                    : "bg-white border-gray-200 text-gray-800 placeholder-gray-500"
                 }`}
               />
             </div>
@@ -357,19 +420,23 @@ const ModernTodoApp = () => {
         {/* Filtres */}
         <div className={cardClass + " p-4 mb-6"}>
           <div className="flex flex-wrap gap-2 justify-center">
-            {['all', 'active', 'completed'].map((filterType) => (
+            {["all", "active", "completed"].map((filterType) => (
               <button
                 key={filterType}
                 onClick={() => setFilter(filterType)}
                 className={`px-4 py-2 rounded-lg transition-all duration-300 capitalize ${
                   filter === filterType
-                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
                     : darkMode
-                    ? 'bg-white/10 text-gray-300 hover:bg-white/20'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? "bg-white/10 text-gray-300 hover:bg-white/20"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
               >
-                {filterType === 'all' ? 'Toutes' : filterType === 'active' ? 'Actives' : 'Terminées'}
+                {filterType === "all"
+                  ? "Toutes"
+                  : filterType === "active"
+                  ? "Actives"
+                  : "Terminées"}
               </button>
             ))}
           </div>
@@ -383,12 +450,16 @@ const ModernTodoApp = () => {
                 <Calendar className="w-8 h-8 text-white" />
               </div>
               <p className="text-lg font-medium opacity-70">
-                {filter === 'all' ? 'Aucune tâche pour le moment' : 
-                 filter === 'active' ? 'Aucune tâche active' : 
-                 'Aucune tâche terminée'}
+                {filter === "all"
+                  ? "Aucune tâche pour le moment"
+                  : filter === "active"
+                  ? "Aucune tâche active"
+                  : "Aucune tâche terminée"}
               </p>
               <p className="text-sm opacity-50 mt-2">
-                {filter === 'all' ? 'Commencez par ajouter votre première tâche !' : ''}
+                {filter === "all"
+                  ? "Commencez par ajouter votre première tâche !"
+                  : ""}
               </p>
             </div>
           ) : (
@@ -396,24 +467,23 @@ const ModernTodoApp = () => {
               <div
                 key={task.id}
                 className={`${cardClass} p-4 hover:scale-[1.02] transition-all duration-300 ${
-                  task.completed ? 'opacity-70' : ''
+                  task.completed ? "opacity-70" : ""
                 }`}
                 style={{
                   animationDelay: `${index * 0.1}s`,
-                  animation: 'slideIn 0.5s ease-out forwards'
+                  animation: "slideIn 0.5s ease-out forwards",
                 }}
               >
                 <div className="flex items-center space-x-4">
-                  
                   {/* Checkbox */}
                   <button
                     onClick={() => toggleTask(task.id)}
                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                       task.completed
-                        ? 'bg-gradient-to-r from-green-400 to-emerald-500 border-green-400'
+                        ? "bg-gradient-to-r from-green-400 to-emerald-500 border-green-400"
                         : darkMode
-                        ? 'border-white/30 hover:border-white/50'
-                        : 'border-gray-300 hover:border-gray-400'
+                        ? "border-white/30 hover:border-white/50"
+                        : "border-gray-300 hover:border-gray-400"
                     }`}
                   >
                     {task.completed && <Check className="w-4 h-4 text-white" />}
@@ -421,24 +491,34 @@ const ModernTodoApp = () => {
 
                   {/* Contenu de la tâche */}
                   <div className="flex-1">
-                    <p className={`text-lg ${task.completed ? 'line-through opacity-60' : ''}`}>
+                    <p
+                      className={`text-lg ${
+                        task.completed ? "line-through opacity-60" : ""
+                      }`}
+                    >
                       {task.text}
                     </p>
                     <div className="flex items-center space-x-3 mt-1">
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        darkMode ? 'bg-white/10' : 'bg-gray-100'
-                      }`}>
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full ${
+                          darkMode ? "bg-white/10" : "bg-gray-100"
+                        }`}
+                      >
                         {task.createdAt}
                       </span>
-                      
+
                       {/* Priorité */}
                       <select
                         value={task.priority}
-                        onChange={(e) => changePriority(task.id, e.target.value)}
+                        onChange={(e) =>
+                          changePriority(task.id, e.target.value)
+                        }
                         className={`text-xs px-2 py-1 rounded-full border-none outline-none cursor-pointer ${
-                          task.priority === 'high' ? 'bg-red-100 text-red-800' :
-                          task.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
+                          task.priority === "high"
+                            ? "bg-red-100 text-red-800"
+                            : task.priority === "medium"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-green-100 text-green-800"
                         }`}
                       >
                         <option value="low">Basse</option>
@@ -452,9 +532,9 @@ const ModernTodoApp = () => {
                   <button
                     onClick={() => deleteTask(task.id)}
                     className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${
-                      darkMode 
-                        ? 'text-red-400 hover:bg-red-500/20' 
-                        : 'text-red-500 hover:bg-red-50'
+                      darkMode
+                        ? "text-red-400 hover:bg-red-500/20"
+                        : "text-red-500 hover:bg-red-50"
                     }`}
                   >
                     <Trash2 className="w-4 h-4" />
@@ -468,20 +548,30 @@ const ModernTodoApp = () => {
         {/* Footer avec informations de stockage */}
         {totalTasks > 0 && (
           <div className="text-center mt-8 space-y-3">
-            <div className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full ${
-              darkMode ? 'bg-white/10 text-gray-300' : 'bg-white/60 text-gray-600'
-            }`}>
+            <div
+              className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full ${
+                darkMode
+                  ? "bg-white/10 text-gray-300"
+                  : "bg-white/60 text-gray-600"
+              }`}
+            >
               <span className="text-sm">
                 {completedTasks} sur {totalTasks} tâches terminées
               </span>
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             </div>
-            
-            <div className={`text-xs px-3 py-1 rounded-full inline-flex items-center space-x-1 ${
-              darkMode ? 'bg-blue-500/20 text-blue-400' : 'bg-blue-100 text-blue-600'
-            }`}>
+
+            <div
+              className={`text-xs px-3 py-1 rounded-full inline-flex items-center space-x-1 ${
+                darkMode
+                  ? "bg-blue-500/20 text-blue-400"
+                  : "bg-blue-100 text-blue-600"
+              }`}
+            >
               <Save className="w-3 h-3" />
-              <span>Données sauvegardées automatiquement dans le navigateur</span>
+              <span>
+                Données sauvegardées automatiquement dans le navigateur
+              </span>
             </div>
           </div>
         )}
