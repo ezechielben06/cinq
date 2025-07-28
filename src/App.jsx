@@ -34,7 +34,13 @@ const ModernTodoApp = () => {
       checkCircle: "✅",
       alert: "⚠️",
       filter: "🔽",
-      upload: "⬆️"
+      upload: "⬆️",
+      heart: "❤️",
+      code: "💻",
+      linkedin: "💼",
+      github: "🐱",
+      email: "📧",
+      globe: "🌍"
     };
 
     return (
@@ -331,47 +337,47 @@ const ModernTodoApp = () => {
 
   return (
     <div className={containerClass}>
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-between mb-6">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-4 sm:mb-6 space-y-4 sm:space-y-0">
             <div className="flex items-center space-x-3">
-              <div className="w-25 h-25">
+              <div className="w-16 h-16 sm:w-20 sm:h-20">
                 <img
                   src="./image.png"
                   alt="Description"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-xl"
                 />
               </div>
-              <div>
+              <div className="text-left">
                 <h1
-                  className={`text-3xl font-bold ${
+                  className={`text-2xl sm:text-3xl font-bold ${
                     darkMode ? "text-white" : "text-gray-800"
                   }`}
                 >
                 Tâche-liste Pro
                 </h1>
                 <p
-                  className={`text-sm ${
+                  className={`text-xs sm:text-sm ${
                     darkMode ? "text-gray-300" : "text-gray-600"
                   }`}
                 >
-                  Organisez votre journée avec style et efficacité
+                  Organisez votre journée avec style
                 </p>
                 <div
-                  className={`text-xs mt-1 flex items-center justify-center space-x-1 ${
+                  className={`text-xs mt-1 flex items-center space-x-1 ${
                     darkMode ? "text-gray-400" : "text-gray-500"
                   }`}
                 >
                   <Icon type="save" className="w-3 h-3" />
-                  <span>Dernière sauvegarde: {formatLastSaved()}</span>
+                  <span>Sauvegarde: {formatLastSaved()}</span>
                 </div>
               </div>
             </div>
 
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-3 rounded-[50%] transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+              className={`p-3 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
                 darkMode
                   ? "bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30"
                   : "bg-purple-500/20 text-purple-600 hover:bg-purple-500/30"
@@ -383,35 +389,35 @@ const ModernTodoApp = () => {
           </div>
 
           {/* Statistiques améliorées */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-            <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-blue-500">{stats.total}</div>
-              <div className="text-sm opacity-70">Total</div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-4 sm:mb-6">
+            <div className={cardClass + " p-3 sm:p-4"}>
+              <div className="text-xl sm:text-2xl font-bold text-blue-500">{stats.total}</div>
+              <div className="text-xs sm:text-sm opacity-70">Total</div>
             </div>
-            <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-orange-500">{stats.active}</div>
-              <div className="text-sm opacity-70">Actives</div>
+            <div className={cardClass + " p-3 sm:p-4"}>
+              <div className="text-xl sm:text-2xl font-bold text-orange-500">{stats.active}</div>
+              <div className="text-xs sm:text-sm opacity-70">Actives</div>
             </div>
-            <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-green-500">{stats.completed}</div>
-              <div className="text-sm opacity-70">Terminées</div>
+            <div className={cardClass + " p-3 sm:p-4"}>
+              <div className="text-xl sm:text-2xl font-bold text-green-500">{stats.completed}</div>
+              <div className="text-xs sm:text-sm opacity-70">Terminées</div>
             </div>
-            <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-red-500">{stats.overdue}</div>
-              <div className="text-sm opacity-70">En retard</div>
+            <div className={cardClass + " p-3 sm:p-4 col-span-1 sm:col-span-1"}>
+              <div className="text-xl sm:text-2xl font-bold text-red-500">{stats.overdue}</div>
+              <div className="text-xs sm:text-sm opacity-70">En retard</div>
             </div>
-            <div className={cardClass + " p-4"}>
-              <div className="text-2xl font-bold text-yellow-500">{stats.dueSoon}</div>
-              <div className="text-sm opacity-70">Bientôt dues</div>
+            <div className={cardClass + " p-3 sm:p-4 col-span-1 sm:col-span-1"}>
+              <div className="text-xl sm:text-2xl font-bold text-yellow-500">{stats.dueSoon}</div>
+              <div className="text-xs sm:text-sm opacity-70">Bientôt dues</div>
             </div>
           </div>
         </div>
 
         {/* Actions de sauvegarde */}
-        <div className={cardClass + " p-4 mb-6"}>
+        <div className={cardClass + " p-3 sm:p-4 mb-4 sm:mb-6"}>
           <div className="flex flex-wrap gap-2 justify-center items-center">
             <span
-              className={`text-sm font-medium ${
+              className={`text-xs sm:text-sm font-medium ${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
@@ -420,14 +426,14 @@ const ModernTodoApp = () => {
 
             <button
               onClick={exportData}
-              className="px-3 py-1.5 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-500/30 transition-all duration-300 text-sm flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-2 sm:px-3 py-1.5 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-500/30 transition-all duration-300 text-xs sm:text-sm flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Exporter les données"
             >
               <Icon type="download" className="w-3 h-3" />
               <span>Exporter</span>
             </button>
 
-            <label className="px-3 py-1.5 bg-green-500/20 text-green-600 dark:text-green-400 rounded-lg hover:bg-green-500/30 transition-all duration-300 text-sm flex items-center space-x-1 cursor-pointer focus-within:ring-2 focus-within:ring-green-500">
+            <label className="px-2 sm:px-3 py-1.5 bg-green-500/20 text-green-600 dark:text-green-400 rounded-lg hover:bg-green-500/30 transition-all duration-300 text-xs sm:text-sm flex items-center space-x-1 cursor-pointer focus-within:ring-2 focus-within:ring-green-500">
               <input
                 type="file"
                 accept=".json"
@@ -441,17 +447,17 @@ const ModernTodoApp = () => {
 
             <button
               onClick={clearAllData}
-              className="px-3 py-1.5 bg-red-500/20 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-500/30 transition-all duration-300 text-sm flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="px-2 sm:px-3 py-1.5 bg-red-500/20 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-500/30 transition-all duration-300 text-xs sm:text-sm flex items-center space-x-1 focus:outline-none focus:ring-2 focus:ring-red-500"
               aria-label="Effacer toutes les données"
             >
               <Icon type="x" className="w-3 h-3" />
-              <span>Effacer tout</span>
+              <span>Effacer</span>
             </button>
           </div>
         </div>
 
         {/* Barre de recherche et filtres */}
-        <div className={cardClass + " p-6 mb-6"}>
+        <div className={cardClass + " p-4 sm:p-6 mb-4 sm:mb-6"}>
           <div className="space-y-4">
             {/* Recherche */}
             <div className="relative">
@@ -461,7 +467,7 @@ const ModernTodoApp = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Rechercher une tâche..."
-                className={`w-full pl-10 pr-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                className={`w-full pl-10 pr-4 py-2 sm:py-3 text-sm sm:text-base rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
                   darkMode
                     ? "bg-white/10 border-white/20 text-white placeholder-gray-400"
                     : "bg-white border-gray-200 text-gray-800 placeholder-gray-500"
@@ -473,12 +479,12 @@ const ModernTodoApp = () => {
             {/* Filtres par catégorie */}
             {categories.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                <span className={`text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                <span className={`text-xs sm:text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                   Catégories:
                 </span>
                 <button
                   onClick={() => setCategoryFilter("all")}
-                  className={`px-3 py-1 rounded-full text-xs transition-all duration-300 ${
+                  className={`px-2 sm:px-3 py-1 rounded-full text-xs transition-all duration-300 ${
                     categoryFilter === "all"
                       ? "bg-purple-500 text-white"
                       : darkMode
@@ -492,7 +498,7 @@ const ModernTodoApp = () => {
                   <button
                     key={category}
                     onClick={() => setCategoryFilter(category)}
-                    className={`px-3 py-1 rounded-full text-xs transition-all duration-300 ${
+                    className={`px-2 sm:px-3 py-1 rounded-full text-xs transition-all duration-300 ${
                       categoryFilter === category
                         ? "bg-purple-500 text-white"
                         : darkMode
@@ -509,16 +515,16 @@ const ModernTodoApp = () => {
         </div>
 
         {/* Formulaire d'ajout amélioré */}
-        <div className={cardClass + " p-6 mb-6"}>
-          <form onSubmit={addTask} className="space-y-4">
-            <div className="flex space-x-3">
+        <div className={cardClass + " p-4 sm:p-6 mb-4 sm:mb-6"}>
+          <form onSubmit={addTask} className="space-y-3 sm:space-y-4">
+            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
               <div className="flex-1">
                 <input
                   type="text"
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
                   placeholder="Ajouter une nouvelle tâche..."
-                  className={`w-full px-4 py-3 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                  className={`w-full px-4 py-2 sm:py-3 text-sm sm:text-base rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
                     darkMode
                       ? "bg-white/10 border-white/20 text-white placeholder-gray-400"
                       : "bg-white border-gray-200 text-gray-800 placeholder-gray-500"
@@ -528,21 +534,21 @@ const ModernTodoApp = () => {
               </div>
               <button
                 type="submit"
-                className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-lg"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-lg"
                 aria-label="Ajouter la tâche"
               >
                 <Icon type="plus" />
               </button>
             </div>
             
-            <div className="flex space-x-3">
+            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
               <div className="flex-1">
                 <input
                   type="text"
                   value={newTaskCategory}
                   onChange={(e) => setNewTaskCategory(e.target.value)}
                   placeholder="Catégorie (optionnel)"
-                  className={`w-full px-4 py-2 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                  className={`w-full px-4 py-2 text-sm sm:text-base rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
                     darkMode
                       ? "bg-white/10 border-white/20 text-white placeholder-gray-400"
                       : "bg-white border-gray-200 text-gray-800 placeholder-gray-500"
@@ -555,7 +561,7 @@ const ModernTodoApp = () => {
                   type="date"
                   value={newTaskDueDate}
                   onChange={(e) => setNewTaskDueDate(e.target.value)}
-                  className={`w-full px-4 py-2 rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+                  className={`w-full px-4 py-2 text-sm sm:text-base rounded-lg border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
                     darkMode
                       ? "bg-white/10 border-white/20 text-white"
                       : "bg-white border-gray-200 text-gray-800"
@@ -568,7 +574,7 @@ const ModernTodoApp = () => {
         </div>
 
         {/* Filtres de statut */}
-        <div className={cardClass + " p-4 mb-6"}>
+        <div className={cardClass + " p-3 sm:p-4 mb-4 sm:mb-6"}>
           <div className="flex flex-wrap gap-2 justify-center">
             {[
               { key: "all", label: "Toutes", icon: null },
@@ -580,7 +586,7 @@ const ModernTodoApp = () => {
               <button
                 key={key}
                 onClick={() => setFilter(key)}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-lg transition-all duration-300 flex items-center space-x-1 sm:space-x-2 ${
                   filter === key
                     ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
                     : darkMode
@@ -589,8 +595,9 @@ const ModernTodoApp = () => {
                 }`}
                 aria-label={`Filtrer par ${label.toLowerCase()}`}
               >
-                {icon && <Icon type={icon} className="w-4 h-4" />}
-                <span>{label}</span>
+                {icon && <Icon type={icon} className="w-3 h-3 sm:w-4 sm:h-4" />}
+                <span className="hidden sm:inline">{label}</span>
+                <span className="sm:hidden">{label.split(' ')[0]}</span>
               </button>
             ))}
           </div>
@@ -599,11 +606,11 @@ const ModernTodoApp = () => {
         {/* Liste des tâches */}
         <div className="space-y-3">
           {filteredTasks.length === 0 ? (
-            <div className={cardClass + " p-8 text-center"}>
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center opacity-50">
-                <Icon type="calendar" className="w-8 h-8 text-white" />
+            <div className={cardClass + " p-6 sm:p-8 text-center"}>
+              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center opacity-50">
+                <Icon type="calendar" className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <p className="text-lg font-medium opacity-70">
+              <p className="text-base sm:text-lg font-medium opacity-70">
                 {searchTerm || categoryFilter !== "all"
                   ? "Aucun résultat trouvé"
                   : filter === "all"
@@ -616,7 +623,7 @@ const ModernTodoApp = () => {
                   ? "Aucune tâche en retard"
                   : "Aucune tâche due bientôt"}
               </p>
-              <p className="text-sm opacity-50 mt-2">
+              <p className="text-xs sm:text-sm opacity-50 mt-2">
                 {!searchTerm && categoryFilter === "all" && filter === "all"
                   ? "Commencez par ajouter votre première tâche !"
                   : "Essayez de modifier vos critères de recherche"}
@@ -626,7 +633,7 @@ const ModernTodoApp = () => {
             filteredTasks.map((task, index) => (
               <div
                 key={task.id}
-                className={`${cardClass} p-4 hover:scale-[1.02] transition-all duration-300 ${
+                className={`${cardClass} p-3 sm:p-4 hover:scale-[1.02] transition-all duration-300 ${
                   task.completed ? "opacity-70" : ""
                 } ${isOverdue(task) ? "border-l-4 border-red-500" : ""} ${
                   isDueSoon(task) ? "border-l-4 border-yellow-500" : ""
@@ -636,11 +643,11 @@ const ModernTodoApp = () => {
                   animation: "slideIn 0.5s ease-out forwards",
                 }}
               >
-                <div className="flex items-center space-x-4">
+                <div className="flex items-start space-x-3 sm:space-x-4">
                   {/* Checkbox custom */}
                   <button
                     onClick={() => toggleTask(task.id)}
-                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm ${
+                    className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-xs sm:text-sm flex-shrink-0 mt-1 ${
                       task.completed
                         ? "bg-gradient-to-r from-green-400 to-emerald-500 border-green-400 text-white"
                         : darkMode
@@ -653,9 +660,9 @@ const ModernTodoApp = () => {
                   </button>
 
                   {/* Contenu de la tâche */}
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     {editingTask === task.id ? (
-                      <div className="flex space-x-2">
+                      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                         <input
                           type="text"
                           value={editingText}
@@ -666,7 +673,7 @@ const ModernTodoApp = () => {
                           onKeyDown={(e) => {
                             if (e.key === "Escape") cancelEdit();
                           }}
-                          className={`flex-1 px-3 py-1 rounded border ${
+                          className={`flex-1 px-3 py-1 text-sm sm:text-base rounded border ${
                             darkMode
                               ? "bg-white/10 border-white/20 text-white"
                               : "bg-white border-gray-200 text-gray-800"
@@ -674,31 +681,33 @@ const ModernTodoApp = () => {
                           autoFocus
                           aria-label="Modifier le texte de la tâche"
                         />
-                        <button
-                          onClick={saveEdit}
-                          className="p-1 text-green-500 hover:bg-green-500/20 rounded"
-                          aria-label="Sauvegarder les modifications"
-                        >
-                          ✓
-                        </button>
-                        <button
-                          onClick={cancelEdit}
-                          className="p-1 text-red-500 hover:bg-red-500/20 rounded"
-                          aria-label="Annuler les modifications"
-                        >
-                          ✕
-                        </button>
+                        <div className="flex space-x-1">
+                          <button
+                            onClick={saveEdit}
+                            className="p-1 text-green-500 hover:bg-green-500/20 rounded"
+                            aria-label="Sauvegarder les modifications"
+                          >
+                            ✓
+                          </button>
+                          <button
+                            onClick={cancelEdit}
+                            className="p-1 text-red-500 hover:bg-red-500/20 rounded"
+                            aria-label="Annuler les modifications"
+                          >
+                            ✕
+                          </button>
+                        </div>
                       </div>
                     ) : (
                       <>
                         <p
-                          className={`text-lg ${
+                          className={`text-sm sm:text-lg break-words ${
                             task.completed ? "line-through opacity-60" : ""
                           }`}
                         >
                           {task.text}
                         </p>
-                        <div className="flex items-center space-x-3 mt-1 flex-wrap">
+                        <div className="flex items-center space-x-2 sm:space-x-3 mt-2 flex-wrap gap-1 sm:gap-0">
                           <span
                             className={`text-xs px-2 py-1 rounded-full ${
                               darkMode ? "bg-white/10" : "bg-gray-100"
@@ -713,7 +722,7 @@ const ModernTodoApp = () => {
                             }`}
                           >
                             <Icon type="tag" className="w-3 h-3" />
-                            <span>{task.category}</span>
+                            <span className="truncate max-w-20 sm:max-w-none">{task.category}</span>
                           </span>
 
                           {task.dueDate && (
@@ -741,7 +750,7 @@ const ModernTodoApp = () => {
                             onChange={(e) =>
                               changePriority(task.id, e.target.value)
                             }
-                            className={`text-xs px-2 py-1 rounded-full border-none outline-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-purple-500 ${
+                            className={`text-xs px-1 sm:px-2 py-1 rounded-full border-none outline-none cursor-pointer transition-all duration-300 focus:ring-2 focus:ring-purple-500 ${
                               task.priority === "high"
                                 ? "bg-red-100 text-red-800"
                                 : task.priority === "medium"
@@ -760,11 +769,11 @@ const ModernTodoApp = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center space-x-2">
+                  <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-2 flex-shrink-0">
                     {editingTask !== task.id && (
                       <button
                         onClick={() => startEditing(task)}
-                        className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg ${
+                        className={`p-1 sm:p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-lg ${
                           darkMode
                             ? "text-blue-400 hover:bg-blue-500/20"
                             : "text-blue-500 hover:bg-blue-50"
@@ -777,7 +786,7 @@ const ModernTodoApp = () => {
 
                     <button
                       onClick={() => deleteTask(task.id)}
-                      className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-500 text-lg ${
+                      className={`p-1 sm:p-2 rounded-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-lg ${
                         darkMode
                           ? "text-red-400 hover:bg-red-500/20"
                           : "text-red-500 hover:bg-red-50"
@@ -795,22 +804,22 @@ const ModernTodoApp = () => {
 
         {/* Footer avec informations de stockage */}
         {stats.total > 0 && (
-          <div className="text-center mt-8 space-y-3">
+          <div className="text-center mt-6 sm:mt-8 space-y-3">
             <div
-              className={`inline-flex items-center space-x-2 px-4 py-2 rounded-full ${
+              className={`inline-flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-full ${
                 darkMode
                   ? "bg-white/10 text-gray-300"
                   : "bg-white/60 text-gray-600"
               }`}
             >
-              <span className="text-sm">
+              <span className="text-xs sm:text-sm">
                 {stats.completed} sur {stats.total} tâches terminées
               </span>
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
             </div>
 
             {/* Barre de progression */}
-            <div className="w-full max-w-md mx-auto">
+            <div className="w-full max-w-xs sm:max-w-md mx-auto">
               <div
                 className={`h-2 rounded-full overflow-hidden ${
                   darkMode ? "bg-white/10" : "bg-gray-200"
@@ -829,35 +838,37 @@ const ModernTodoApp = () => {
             </div>
 
             {/* Alertes pour les tâches */}
-            {stats.overdue > 0 && (
-              <div
-                className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full ${
-                  darkMode
-                    ? "bg-red-500/20 text-red-400"
-                    : "bg-red-100 text-red-600"
-                }`}
-              >
-                <Icon type="alert" className="w-3 h-3" />
-                <span className="text-xs">
-                  {stats.overdue} tâche{stats.overdue > 1 ? "s" : ""} en retard
-                </span>
-              </div>
-            )}
+            <div className="flex flex-wrap justify-center gap-2">
+              {stats.overdue > 0 && (
+                <div
+                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full ${
+                    darkMode
+                      ? "bg-red-500/20 text-red-400"
+                      : "bg-red-100 text-red-600"
+                  }`}
+                >
+                  <Icon type="alert" className="w-3 h-3" />
+                  <span className="text-xs">
+                    {stats.overdue} tâche{stats.overdue > 1 ? "s" : ""} en retard
+                  </span>
+                </div>
+              )}
 
-            {stats.dueSoon > 0 && (
-              <div
-                className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full ${
-                  darkMode
-                    ? "bg-yellow-500/20 text-yellow-400"
-                    : "bg-yellow-100 text-yellow-600"
-                }`}
-              >
-                <Icon type="clock" className="w-3 h-3" />
-                <span className="text-xs">
-                  {stats.dueSoon} tâche{stats.dueSoon > 1 ? "s" : ""} due{stats.dueSoon > 1 ? "s" : ""} bientôt
-                </span>
-              </div>
-            )}
+              {stats.dueSoon > 0 && (
+                <div
+                  className={`inline-flex items-center space-x-2 px-3 py-1 rounded-full ${
+                    darkMode
+                      ? "bg-yellow-500/20 text-yellow-400"
+                      : "bg-yellow-100 text-yellow-600"
+                  }`}
+                >
+                  <Icon type="clock" className="w-3 h-3" />
+                  <span className="text-xs">
+                    {stats.dueSoon} tâche{stats.dueSoon > 1 ? "s" : ""} due{stats.dueSoon > 1 ? "s" : ""} bientôt
+                  </span>
+                </div>
+              )}
+            </div>
 
             <div
               className={`text-xs px-3 py-1 rounded-full inline-flex items-center space-x-1 ${
@@ -868,7 +879,7 @@ const ModernTodoApp = () => {
             >
               <Icon type="save" className="w-3 h-3" />
               <span>
-                Données sauvegardées automatiquement en mémoire
+                Données sauvegardées automatiquement
               </span>
             </div>
           </div>
@@ -876,7 +887,7 @@ const ModernTodoApp = () => {
 
         {/* Raccourcis clavier (info) */}
         {stats.total > 0 && (
-          <div className="text-center mt-6">
+          <div className="text-center mt-4 sm:mt-6">
             <details
               className={`inline-block text-xs ${
                 darkMode ? "text-gray-400" : "text-gray-500"
@@ -910,6 +921,124 @@ const ModernTodoApp = () => {
           </div>
         )}
       </div>
+
+      {/* Footer Auteur */}
+      <footer className={`mt-8 sm:mt-12 border-t ${darkMode ? 'border-white/10' : 'border-gray-200'}`}>
+        <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 max-w-4xl">
+          <div className={cardClass + " p-4 sm:p-6"}>
+            <div className="text-center space-y-4">
+              {/* Photo et nom de l'auteur */}
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl sm:text-2xl font-bold shadow-lg">
+                  <Icon type="code" className="w-8 h-8 sm:w-10 sm:h-10" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h3 className={`text-lg sm:text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+                    Développé avec <Icon type="heart" className="w-4 h-4 text-red-500 inline mx-1" /> par
+                  </h3>
+                  <p className={`text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent`}>
+                    HOUNKPE Ezechiel
+                  </p>
+                  <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'} mt-1`}>
+                    Développeur Front-end react et PHP
+                  </p>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className={`text-sm sm:text-base ${darkMode ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
+                <p className="mb-3">
+                  Cette application de gestion des tâches a été conçue avec une approche moderne, 
+                  privilégiant l'expérience utilisateur et l'accessibilité. Construite avec React et Tailwind CSS.
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 text-xs">
+                  <span className={`px-2 py-1 rounded-full ${darkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-700'}`}>
+                    ⚛️ React
+                  </span>
+                  <span className={`px-2 py-1 rounded-full ${darkMode ? 'bg-cyan-500/20 text-cyan-300' : 'bg-cyan-100 text-cyan-700'}`}>
+                    🎨 Tailwind CSS
+                  </span>
+                  <span className={`px-2 py-1 rounded-full ${darkMode ? 'bg-green-500/20 text-green-300' : 'bg-green-100 text-green-700'}`}>
+                    📱 Responsive Design
+                  </span>
+                </div>
+              </div>
+
+              {/* Liens sociaux */}
+              <div className="flex justify-center space-x-4 sm:space-x-6">
+                <a
+                  href="https://github.com/ezechielben06"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 ${
+                    darkMode 
+                      ? 'bg-gray-700/50 text-gray-300 hover:bg-gray-700/70 hover:text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
+                  }`}
+                  aria-label="Profil GitHub"
+                >
+                  <Icon type="github" className="w-4 h-4" />
+                  <span className="text-xs sm:text-sm font-medium">GitHub</span>
+                </a>
+
+                <a
+                  href="ezechielben06@gmail.com"
+                  className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 ${
+                    darkMode 
+                      ? 'bg-green-600/20 text-green-300 hover:bg-green-600/30 hover:text-green-200' 
+                      : 'bg-green-100 text-green-700 hover:bg-green-200 hover:text-green-800'
+                  }`}
+                  aria-label="Envoyer un email"
+                >
+                  <Icon type="email" className="w-4 h-4" />
+                  <span className="text-xs sm:text-sm font-medium">Email</span>
+                </a>
+
+                <a
+                  href="https://ezechielben06.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 ${
+                    darkMode 
+                      ? 'bg-purple-600/20 text-purple-300 hover:bg-purple-600/30 hover:text-purple-200' 
+                      : 'bg-purple-100 text-purple-700 hover:bg-purple-200 hover:text-purple-800'
+                  }`}
+                  aria-label="Visiter le portfolio"
+                >
+                  <Icon type="globe" className="w-4 h-4" />
+                  <span className="text-xs sm:text-sm font-medium">Portfolio</span>
+                </a>
+              </div>
+
+              {/* Copyright et version */}
+              <div className={`border-t pt-4 ${darkMode ? 'border-white/10' : 'border-gray-200'}`}>
+                <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-2`}>
+                  © 2025 Tâche-liste Pro| ezechielben - Tous droits réservés
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs">
+                  <span className={`inline-flex items-center space-x-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <span>Version 2.0.0</span>
+                  </span>
+                  <span className={`hidden sm:inline ${darkMode ? 'text-gray-600' : 'text-gray-300'}`}>•</span>
+                  <span className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    Fait avec passion au BENIN Cotonou 
+                  </span>
+                </div>
+              </div>
+
+              {/* Message motivant */}
+              <div className={`p-3 sm:p-4 rounded-lg ${darkMode ? 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20' : 'bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200'}`}>
+                <p className={`text-xs sm:text-sm font-medium ${darkMode ? 'text-purple-300' : 'text-purple-700'}`}>
+                  ✨ "La productivité n'est pas d'être occupé, mais d'être efficace"
+                </p>
+                <p className={`text-xs mt-1 ${darkMode ? 'text-purple-400' : 'text-purple-600'}`}>
+                  Merci d'utiliser Tâche-liste Pro pour organiser votre quotidien !
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
 
       <style jsx>{`
         @keyframes slideIn {
@@ -964,23 +1093,65 @@ const ModernTodoApp = () => {
           box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
         }
 
-        /* Responsive amélioré */
+        /* Responsive amélioré pour iPhone */
         @media (max-width: 640px) {
-          .grid-cols-5 {
+          .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+
+          /* Statistiques responsive */
+          .grid-cols-2 {
             grid-template-columns: repeat(2, 1fr);
           }
           
-          .grid-cols-5 > div:nth-child(5) {
-            grid-column: span 2;
+          .grid-cols-5 > div:nth-child(n+4) {
+            grid-column: span 1;
           }
 
-          .flex-wrap .flex {
-            flex-wrap: wrap;
+          /* Amélioration des flex wraps */
+          .flex-wrap {
+            gap: 0.5rem;
           }
           
+          /* Boutons plus accessibles sur mobile */
+          button {
+            min-height: 44px;
+          }
+
+          /* Input plus grands sur mobile */
+          input, select {
+            min-height: 44px;
+          }
+
+          /* Texte plus lisible */
+          .text-xs {
+            font-size: 0.75rem;
+          }
+
+          .text-sm {
+            font-size: 0.875rem;
+          }
+        }
+
+        /* Amélioration pour très petits écrans (iPhone SE) */
+        @media (max-width: 375px) {
+          .container {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+          }
+
+          .px-4 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+          }
+
           .space-x-3 > * + * {
-            margin-left: 0;
-            margin-top: 0.75rem;
+            margin-left: 0.5rem;
+          }
+
+          .gap-2 {
+            gap: 0.25rem;
           }
         }
 
@@ -1067,23 +1238,6 @@ const ModernTodoApp = () => {
           animation: progressGrow 1s ease-out;
         }
 
-        /* Tooltips pour l'accessibilité */
-        [aria-label]:hover::after {
-          content: attr(aria-label);
-          position: absolute;
-          bottom: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(0, 0, 0, 0.9);
-          color: white;
-          padding: 0.5rem;
-          border-radius: 0.25rem;
-          font-size: 0.75rem;
-          white-space: nowrap;
-          z-index: 1000;
-          pointer-events: none;
-        }
-
         /* Amélioration de la lisibilité du texte */
         p, span, div {
           line-height: 1.5;
@@ -1093,6 +1247,49 @@ const ModernTodoApp = () => {
         .modal:focus-within {
           outline: 2px solid #8b5cf6;
           outline-offset: -2px;
+        }
+
+        /* Amélioration des liens du footer */
+        footer a {
+          text-decoration: none;
+        }
+
+        footer a:hover {
+          text-decoration: none;
+        }
+
+        /* Animation pour le footer */
+        footer {
+          animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Amélioration des breakwords pour les longs textes */
+        .break-words {
+          word-wrap: break-word;
+          word-break: break-word;
+          hyphens: auto;
+        }
+
+        /* Amélioration pour les écrans tactiles */
+        @media (hover: none) and (pointer: coarse) {
+          .hover\\:scale-105:hover {
+            transform: scale(1.02);
+          }
+
+          .hover\\:scale-110:hover {
+            transform: scale(1.05);
+          }
         }
       `}</style>
     </div>
