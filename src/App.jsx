@@ -934,7 +934,7 @@ const ModernTodoApp = () => {
                 </div>
                 <div className="text-center sm:text-left">
                   <h3 className={`text-lg sm:text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                    Développé avec <Icon type="heart" className="w-4 h-4 text-red-500 inline mx-1" /> par
+                    Développé  par
                   </h3>
                   <p className={`text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent`}>
                     HOUNKPE Ezechiel
